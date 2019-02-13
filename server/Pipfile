@@ -8,6 +8,12 @@ name = "pypi"
 requests = "*"
 lxml = "*"
 mysqlclient = "*"
+"mecab-python3" = "*"
+gensim = "*"
+pandas = "*"
+matplotlib = "*"
+japanize-matplotlib = "*"
+ipython = "*"
 
 [dev-packages]
 

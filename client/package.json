@@ -25,6 +25,9 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sass-glob": "^1.0.9",
     "redux-logger": "^3.0.6"
   }
 }
