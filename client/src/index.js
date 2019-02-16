@@ -5,6 +5,8 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import reducers from './reducers/Reducer';
 import logger from 'redux-logger';
+import 'react-mdl/extra/material.css';
+import 'react-mdl/extra/material.js';
 
 //reducerとミドルウェアをつなげる
 const store = createStore(

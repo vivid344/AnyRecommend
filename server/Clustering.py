@@ -35,13 +35,13 @@ def get_vector_expression(id, news, lda, dict):
 if __name__ == '__main__':
     connection = MySQLdb.connect(host='127.0.0.1', port=3306, user='root', passwd=os.environ['MYSQLPASS'],
                                  db='Anime', charset='utf8')
-    select_sql = 'select id, outline, title from Anime ORDER BY RAND() limit 100'
+    select_sql = 'select id, outline, title from Anime limit 100'
     cursor1 = connection.cursor()
     cursor1.execute(select_sql,)
     vectors = np.zeros(0)
 
     # 関連ファイルの読み込み
-    lda = gensim.models.LdaModel.load(LDA.filename)
+    lda = gensim.models.LdaModel.load('./tmp/lda_50.model')
     dict = gensim.corpora.Dictionary.load('tmp/deerwester.dict')
     count = 0
     first_vector = None

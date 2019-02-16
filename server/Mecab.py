@@ -3,8 +3,8 @@ import MySQLdb
 import os
 
 
-def distribution(id, text):
-    m = MeCab.Tagger()
+def distribution(id, text, stopwords_ja, stopwords_en):
+    m = MeCab.Tagger("-Ochasen -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd/")
     keywords = m.parse(text)
 
     for row in keywords.split('\n'):
@@ -13,13 +13,14 @@ def distribution(id, text):
         if word == 'EOS':
             break
         else:
-            pos = r[1].split(',')[0]
+            pos = r[3].split('-')[0]
             if pos == '名詞':
-                cursor2 = connection.cursor()
-                insert_sql = "insert into WordList(anime_id, word) value(%s, %s)"
-                cursor2.execute(insert_sql, (id, word))
-                connection.commit()
-                cursor2.close()
+                if word not in stopwords_ja and word not in stopwords_en:
+                    cursor2 = connection.cursor()
+                    insert_sql = "insert into WordList(anime_id, word) value(%s, %s)"
+                    cursor2.execute(insert_sql, (id, word))
+                    connection.commit()
+                    cursor2.close()
 
 
 if __name__ == '__main__':
@@ -29,5 +30,29 @@ if __name__ == '__main__':
     cursor1 = connection.cursor()
     cursor1.execute(select_sql)
 
+    # 日本語のstopword
+    stopwords_ja = []
+    f1 = open('./txt/Japanese.txt')
+    data1 = f1.read()
+    f1.close()
+
+    lines1 = data1.split('\n')
+
+    for line in lines1:
+        if line:
+            stopwords_ja.append(line)
+
+    # 英語のstopword
+    stopwords_en = []
+    f2 = open('./txt/English.txt')
+    data2 = f2.read()
+    f2.close()
+
+    lines2 = data2.split('\n')
+
+    for line in lines2:
+        if line:
+            stopwords_en.append(line)
+
     for row in cursor1:
-        distribution(row[0], row[1])
+        distribution(row[0], row[1], stopwords_ja, stopwords_en)
