@@ -1,22 +1,22 @@
 import {connect} from 'react-redux'
-import App from '../components/App'
-import {changeValue} from '../actions/AppAction'
+import Search from '../../components/Search/Search'
+import {connectTest} from '../../actions/AppAction'
 
 //stateにある値をthis.propsで受け取れるように受け取りたい値をここで宣言
 //受け取るReducerの指定→Reducer内に存在する値を指定し，取得
 function mapStateToProps({appReducer}) {
     return {
-        inputValue: appReducer.inputValue,
+        connectValue: appReducer.connectValue,
     };
 }
 
 //Actionで定義したものをthis.propsで受け取れるように受け取りたいActionをここで宣言
 function mapDispatchToProps(dispatch) {
     return {
-        changeValue(value) {
-            dispatch(changeValue(value))
+        connectTest() {
+            dispatch(connectTest())
         }
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import Search from "./Search/Search";
-import Detail from "./Detail/Detail";
-import Similar from "./Similar/Similar";
-import { Layout, Header, Content } from 'react-mdl';
+import Display from "../Display/Display";
+
+import { Layout, Header } from 'react-mdl';
+import { Link } from "react-router-dom";
 
 class App extends Component {
     //thisを関数内でも使えるように定義
@@ -16,12 +16,9 @@ class App extends Component {
                 <div className="demo-big-content">
                     <Layout>
                         <Header title="アニメ推薦">
+                            <Link to='/setting'>Setting</Link>
                         </Header>
-                        <Content className="content-wrapper">
-                            <Search/>
-                            <Detail/>
-                            <Similar/>
-                        </Content>
+                        <Display/>
                     </Layout>
                 </div>
             </div>

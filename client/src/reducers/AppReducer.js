@@ -1,6 +1,7 @@
 //stateの初期化
 const initState = {
-    inputValue: ''
+    inputValue: '',
+    connectValue: '',
 };
 
 //呼ばれたActionによって行う処理の分岐
@@ -11,6 +12,12 @@ export default function appReducer(state = initState, action) {
                 ...state,
                 inputValue: action.value
             };
+        case 'CONNECT_VALUE':
+            return {
+                ...state,
+                connectValue: action.value
+            };
+
         default:
             return state;
     }
